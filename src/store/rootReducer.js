@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import orders from './bookReducer';
+import players from './playerReducer';
 
 const rootReducer = combineReducers({
-  orders,
+  players,
 });
 
 const CryptoApp = (state, action) => {

@@ -1,10 +1,10 @@
 import React from 'react';
-import ExchangeContainer from './components/ExchangeContainer';
+import LeaderBoardContainer from './components/LeaderBoardContainer';
 import style from './App.css';
 
 const App = () => (
 	<div className={style.App}>
-		<ExchangeContainer />
+		<LeaderBoardContainer />
 	</div>
 );
 
