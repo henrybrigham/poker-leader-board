@@ -5,118 +5,91 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors       = require('cors');
 const http       = require('http');
-const socket_io  = require('socket.io');
+const helmet     = require('helmet');
+const mongoose = require("mongoose");
+const app        = module.exports = express();
 const axios 	   = require("axios");
 const Helpers = require('./helpers');
-const marketUrls = require('./enumerations/marketUrls');
-let app = express();
-const sharedsession = require('express-socket.io-session');
-let session = require('express-session')({
-  secret: 'my-secret',
-  resave: true,
-  saveUninitialized: true
-});
+const session    = require('client-sessions');
 
 ////////////
 // Server //
 ////////////
-const server = http.createServer(app);
-const io = socket_io(server);
-
-/////////////
-// Session //
-/////////////
-// Use express-session middleware for express
-app.use(session);
-
 app.use(function(req, res, next) {
   console.log(req.METHOD, req.url);
   next();
 });
 
-// Use shared session middleware for socket.io
-io.use(sharedsession(session, {
-  autoSave:true
-}));
-
-////////////
-// Sockets //
-////////////
-io.attach(server);
-io.on('connection', function(socket){
-	let requestNumber = 0;
-
-	let errors = {
-		poloniexError: '',
-		bittrexError: ''
-	};
-	let bookOrders = {
-		poloniexOrders: {},
-		bittrexOrders: {}
-	}
-
-  socket.on('action', (action) => {
-		socket.handshake.session.market = action.market;
-		socket.handshake.session.save();
-
-		const getBittrexBook = async (url, number) => {
-			try {
-				const response = await axios.get(url);
-				const formattedBittrexBookOrders = Helpers.formatBittrexOrders(response.data.result);
-				bookOrders.bittrexOrders = formattedBittrexBookOrders;
-				if(requestNumber === number) {
-					socket.emit('action', { type: 'orders/GET_BOOK_ORDERS_SUCCESS', payload: bookOrders });
-					setTimeout(getBittrexBook, 2000, url, number);
-				}
-			} catch (error) {
-				errors.bittrexError = error;
-				if(requestNumber === number) {
-					socket.emit('action', { type: 'orders/GET_BOOK_ORDERS_FAILURE', payload: errors });	
-				}
-			}
-		};
-
-		const getPoloniexBook = async (url, number) => {
-			try {
-				const response = await axios.get(url);
-				const formattedPoloniexBookOrders = Helpers.formatPoloniexOrders(response.data);
-				bookOrders.poloniexOrders = formattedPoloniexBookOrders;
-				if(requestNumber === number) {
-					socket.emit('action', { type: 'orders/GET_BOOK_ORDERS_SUCCESS', payload: bookOrders });
-					setTimeout(getPoloniexBook, 2000, url, number);
-				}
-			} catch (error) {
-				errors.poloniexError = error;
-				if(requestNumber === number) {
-					socket.emit('action', { type: 'orders/GET_BOOK_ORDERS_FAILURE', payload: errors });
-				}
-			}
-		};
-
-    if (action.type === 'orders/GET_BOOK_ORDERS_REQUEST') {
-			const poloniexUrl = marketUrls.poloniex[action.market];
-			const bittrexUrl = marketUrls.bittrex[action.market];
-			requestNumber += 1;
-			getPoloniexBook(poloniexUrl, requestNumber);
-			getBittrexBook(bittrexUrl, requestNumber);
-		}
-	});
-	
-	socket.on('disconnect', function () {
-		requestNumber += 1;
-		delete socket.handshake.session.market;
-    socket.handshake.session.save();
-	 });
-});
-
-///////////////////////
-// Import/Use Routes //
-///////////////////////
 app.use(function(req, res, next) {
 	res.status(404);
 	res.send("no");
 });
 
-server.listen(8000, () => {
+app.listen(8000, () => {
 	console.log('listening, 8000');
 });
+
+////////////////
+// Misc Setup //
+////////////////
+app.locals.basedir = __dirname;
+const gar = global.appRoot = app.locals.basedir;
+
+try {
+  app.secret = require(`${gar}/secrets`);
+} catch (err) {
+  app.secret = {
+    appSecret: '4b7b78a47825bfbd0d58a7851f73450197b779fd446cef73196a7063c9e4a150'
+  };
+}
+
+/////////////
+// Session //
+/////////////
+app.use(session({
+  cookieName: 'leaderBoard',
+  requestKey: 'session',
+  secret: app.secret.appSecret, // should be a large unguessable string
+  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+  activeDuration: 1000 * 60 * 5, // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+  cookie: {
+    httpOnly: false,
+    secure: false
+  }
+}));
+
+////////////////
+// Middleware //
+////////////////
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(helmet());
+
+app.use(cors({
+	origin: true,
+	credentials: true
+}));
+
+app.use(function(req, res, next) {
+	console.log(req.url);
+	next();
+});
+
+///////////////////////
+// Import/Use Routes //
+///////////////////////
+const player = require('./routes/player');
+app.use('/player', player);
+
+//////////////
+// Mongoose //
+//////////////
+// mongoose.set('debug', true);
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/leaderBoard', { useNewUrlParser: true });
+const PlayerModel = require('./models/player.model')(mongoose);
+
+mongoose.set('debug', true)
