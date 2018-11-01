@@ -42,7 +42,30 @@ const actionHandlers = {
       players: state.players,
 			isFetching: false,
 			error: true
-    }),
+		}),
+	
+	[CREATE_PLAYER_REQUEST]: state => (
+		updateObject(state, {
+			players: state.players,
+			isFetching: false,
+			error: false
+		})
+	),
+		
+	[CREATE_PLAYER_SUCCESS]: (state, action) => (
+		updateObject(state, {
+			players: state.players.concat(action.player),
+			isFetching: false,
+			error: false
+		})
+	),
+
+	[CREATE_PLAYER_FAILURE]: state =>
+		updateObject(state, {
+			players: state.players,
+			isFetching: false,
+			error: true
+		}),
 };
 
 export default createReducer(initialState, actionHandlers);
