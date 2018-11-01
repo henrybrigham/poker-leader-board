@@ -16,7 +16,7 @@ class Player extends React.PureComponent {
 		const { name, winnings, country } = this.props.player;
   	return (
 			<div className="row">
-				<div className="index">{this.props.index}.</div>
+				<div className="index">{this.props.index}</div>
 				<div className="nameSpace">
 					<p>{name}</p>
 				</div>
