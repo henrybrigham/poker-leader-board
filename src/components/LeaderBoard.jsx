@@ -25,8 +25,8 @@ class LeaderBoard extends React.Component {
 	renderPlayers = () => {
 		const { players } = this.props;
 		const sortedPlayers = players.sort((a, b) => b - a);
-		
-		const mappedPlayers = sortedPlayers.map((player, i) => <Player key={i} player={player}/>
+
+		const mappedPlayers = sortedPlayers.map((player, i) => <Player key={i} player={player} index={i}/>
 		);
 		return mappedPlayers;
 	}
@@ -35,8 +35,21 @@ class LeaderBoard extends React.Component {
 		const { players } = this.props;
   	return (
 			<div className="column leaderBoard">
-				<h2 className="pageHeader">Poker Leaderboard</h2>
-				{ Object.keys(players).length > 0 ?this.renderPlayers() : '' }
+				<h2 className="pageHeader">ALL-TIME TOURNAMENT EARNINGS</h2>
+				<div className="boardHeader row">
+					<div className="nameSpace">
+						<span>Player</span>
+					</div>
+					<div className="otherSpace">
+						<span>Winnings</span>
+					</div>
+					<div className="otherSpace">
+						<span>Native Of</span>
+					</div>
+				</div>
+				<div className="playerContainer">
+					{ Object.keys(players).length > 0 ?this.renderPlayers() : '' }
+				</div>
 				<AddPlayer createPlayer={this.props.createPlayer} />
   		</div>
   	);

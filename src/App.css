@@ -143,7 +143,35 @@ h2 {
 }
 
 .leaderBoard {
-	width: 60%;
+	width: 40%;
+}
+
+.playerContainer {
+	border: 1px solid silver;
+}
+
+.boardHeader {
+	background: silver;
+	color: black;
+	height: 35px;
+	display: flex;
+	align-items: center;
+}
+
+.nameSpace {
+	width: 50%;
+	display: flex;
+	align-items: center;
+}
+
+.otherSpace {
+	width: 25%;
+	display: flex;
+	align-items: center;
+}
+
+.index {
+	padding: 10px;
 }
 
 .player {
