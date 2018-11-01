@@ -1,15 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import LeaderBoardApp from './rootReducer';
+import thunk from 'redux-thunk';
+import LeaderBoardApp from './reducers/rootReducer';
 
-const apiUrl = 'http://localhost:8000';
-	
-const middlewareEnhancer = applyMiddleware();
-const storeEnhancers = [middlewareEnhancer];
-const composedEnhancer = compose(...storeEnhancers);
+function configureStore(preloadedState) {
+  const store = createStore(LeaderBoardApp, preloadedState, applyMiddleware(thunk));
 
-const store = createStore(
-	LeaderBoardApp,
-	composedEnhancer
-);
+  return store;
+}
 
-export default store;
+export default configureStore;

@@ -12,23 +12,6 @@ const axios 	   = require("axios");
 const Helpers = require('./helpers');
 const session    = require('client-sessions');
 
-////////////
-// Server //
-////////////
-app.use(function(req, res, next) {
-  console.log(req.METHOD, req.url);
-  next();
-});
-
-app.use(function(req, res, next) {
-	res.status(404);
-	res.send("no");
-});
-
-app.listen(8000, () => {
-	console.log('listening, 8000');
-});
-
 ////////////////
 // Misc Setup //
 ////////////////
@@ -92,4 +75,21 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/leaderBoard', { useNewUrlParser: true });
 const PlayerModel = require('./models/player.model')(mongoose);
 
-mongoose.set('debug', true)
+mongoose.set('debug', true);
+
+////////////
+// Server //
+////////////
+app.use(function(req, res, next) {
+  console.log(req.METHOD, req.url);
+  next();
+});
+
+app.use(function(req, res, next) {
+	res.status(404);
+	res.send("no");
+});
+
+app.listen(8000, () => {
+	console.log('listening, 8000');
+});

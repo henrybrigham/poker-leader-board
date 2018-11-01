@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
 				res.status(500).send({ msg: 'Error getting all players', err: err });
 				return;
 			} if(!players){
+				console.log('none');
 				res.status(200).send("[]");
 				return;
 			}
@@ -36,10 +37,9 @@ router.get('/:playerId', function(req, res) {
 	);
 });
 
-router.post('/', upload,
-function(req, res){
-	const player = JSON.parse(req.body.player);
-	
+router.post('/', function(req, res){
+	const newPlayer = req.body;
+
   new PlayerModel(newPlayer).save(function(err, createdPlayer){
 		if (err) {
 			res.status(500);

@@ -1,3 +1,4 @@
+import {makeActionCreator} from '../utilities';
 export const GET_PLAYERS_REQUEST = 'GET_PLAYERS_REQUEST';
 export const GET_PLAYERS_SUCCESS = 'GET_PLAYERS_SUCCESS';
 export const GET_PLAYERS_FAILURE = 'GET_PLAYERS_FAILURE';
@@ -11,9 +12,10 @@ export const DELETE_PLAYER_REQUEST = 'DELETE_PLAYER_REQUEST';
 export const DELETE_PLAYER_SUCCESS = 'DELETE_PLAYER_SUCCESS';
 export const DELETE_PLAYER_FAILURE = 'DELETE_PLAYER_FAILURE';
 
-export const fetchPlayersRequest = () => ({
+export const fetchPlayersRequest = () => (
+{
 	type: GET_PLAYERS_REQUEST
- });
+});
 
 export const fetchPlayersSuccess = (players) => ({
 	type: GET_PLAYERS_SUCCESS, 

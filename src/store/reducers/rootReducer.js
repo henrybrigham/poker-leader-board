@@ -5,8 +5,9 @@ const rootReducer = combineReducers({
   players,
 });
 
-const CryptoApp = (state, action) => {
+const LeaderBoardApp = (state, action) => {
+	console.log('root', state, action);
   return rootReducer(state, action);
 };
 
-export default CryptoApp;
+export default LeaderBoardApp;

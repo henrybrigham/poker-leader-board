@@ -1,31 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchPlayersRequest } from '../store/playerActions';
+import { createPlayer, fetchPlayers } from '../store/thunks/playerThunks';
+import { fetchPlayersRequest } from '../store/actions/playerActions';
 import LeaderBoard from './LeaderBoard';
 
 const propTypes = {
-	players: PropTypes.array,
+	players: PropTypes.array.isRequired,
 	fetchPlayers: PropTypes.func.isRequired,
+	createPlayer: PropTypes.func.isRequired,
 	isFetching: PropTypes.bool.isRequired,
 	error: PropTypes.bool.isRequired
 };
 
-const defaultProps = {
-	players: []
-}
-
-const LeaderBoardContainer = ({ players, fetchPlayers, isFetching, error }) => (
-	<LeaderBoard players={Players}
+const LeaderBoardContainer = ({ players, fetchPlayers, createPlayer, isFetching, error }) => {
+	console.log('container', isFetching, error);
+	return <LeaderBoard players={players}
 	fetchPlayers={fetchPlayers}
+	createPlayer={createPlayer}
 	isFetching={isFetching}
 	error={error}
 	/>
-);
+};
 
 function mapStateToProps(state) {
   return {
-		players: state.players.players || [],
+		players: state.players.players,
 		isFetching: state.players.isFetching,
 		error: state.players.error
 	}
@@ -35,13 +35,15 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchPlayers: () => {
-			dispatch(fetchPlayersRequest());
+			dispatch(fetchPlayers());
+		},
+		createPlayer: (player) => {
+			dispatch(createPlayer(player));
 		}
   }
 }
 
 LeaderBoardContainer.propTypes = propTypes;
-LeaderBoardContainer.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderBoardContainer);
 export {LeaderBoardContainer as TestableLeaderBoardContainer};
