@@ -3,7 +3,7 @@ import LeaderBoardContainer from './components/LeaderBoardContainer';
 import style from './App.css';
 
 const App = () => (
-	<div className={style.App}>
+	<div className="center">
 		<LeaderBoardContainer />
 	</div>
 );

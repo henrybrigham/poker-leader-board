@@ -23,7 +23,7 @@ class LeaderBoard extends React.PureComponent {
 		this.state = {
 			name: '',
 			winnings: 0,
-			country: ''
+			country: {}
 		}
 	}
 
@@ -34,7 +34,16 @@ class LeaderBoard extends React.PureComponent {
 	}
 
 	updateCountry = (selectedCountry) => {
-		this.setState({country: selectedCountry.value});
+		this.setState({country: selectedCountry});
+	}
+
+	createPlayer = () => {
+		const newPlayer = {
+			name: this.state.name,
+			winnings: this.state.winnings,
+			country: this.state.country.value
+		}
+		this.props.createPlayer(newPlayer);
 	}
 
   render() {
@@ -51,7 +60,7 @@ class LeaderBoard extends React.PureComponent {
 						options={options}
 					/>
 				</div>
-				<button onClick={() => this.props.createPlayer(this.state)}>Add</button>
+				<button onClick={() => this.createPlayer}>Add</button>
   		</div>
   	);
   }

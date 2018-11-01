@@ -3,7 +3,7 @@ p {
 }
 
 body {
-	background-color: #29313d;
+	background-color: #fafafa;
 }
 
 h2 {
@@ -140,6 +140,14 @@ h2 {
 .loader {
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.leaderBoard {
+	width: 60%;
+}
+
+.player {
+
 }
 
 @keyframes App-logo-spin {

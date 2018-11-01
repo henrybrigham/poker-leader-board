@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from '../assets/loading.gif';
 import AddPlayer from './AddPlayer';
-import Player from './player/Player';
+import Player from './Player';
 import style from '../App.css';
 
 const propTypes = {
@@ -25,7 +25,8 @@ class LeaderBoard extends React.Component {
 	renderPlayers = () => {
 		const { players } = this.props;
 		const sortedPlayers = players.sort((a, b) => b - a);
-		const mappedPlayers = sortedPlayers.map((player, i) => 		<Player key={i} player={player}/>
+		
+		const mappedPlayers = sortedPlayers.map((player, i) => <Player key={i} player={player}/>
 		);
 		return mappedPlayers;
 	}
@@ -33,7 +34,7 @@ class LeaderBoard extends React.Component {
   render() {
 		const { players } = this.props;
   	return (
-			<div className={style.center}>
+			<div className="column leaderBoard">
 				<h2 className="pageHeader">Poker Leaderboard</h2>
 				{ Object.keys(players).length > 0 ?this.renderPlayers() : '' }
 				<AddPlayer createPlayer={this.props.createPlayer} />

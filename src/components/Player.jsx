@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './player.css';
+import style from '../App.css';
 
 const propTypes = {
 	player: PropTypes.object.isRequired
@@ -14,7 +14,7 @@ class Player extends React.PureComponent {
   render() {
 		const { name, winnings, country } = this.props.player;
   	return (
-			<div className={`row ${style.player}`}>
+			<div className="row">
 				<p>{name}</p>
 				<p>{winnings}</p>
 				<p>{country}</p>
