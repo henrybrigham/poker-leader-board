@@ -38,15 +38,12 @@ h2 {
   font-size: large;
 }
 
-.bookOrder {
+.editPlayer {
 	opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-in;
 	animation-duration: 2s;
-	height: 30px;
-	width: 100%;
-	border-bottom: 1px solid silver;
 }
 
 .exchangeContainer {
@@ -156,6 +153,7 @@ h2 {
 	height: 35px;
 	display: flex;
 	align-items: center;
+	padding: 5px 5px 5px 30px;
 }
 
 .nameSpace {

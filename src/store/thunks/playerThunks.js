@@ -3,6 +3,12 @@ import {
 	createPlayerRequest, 
 	createPlayerSuccess, 
 	createPlayerFailure,
+	deletePlayerRequest, 
+	deletePlayerSuccess, 
+	deletePlayerFailure,
+	updatePlayerRequest, 
+	updatePlayerSuccess, 
+	updatePlayerFailure,
 	fetchPlayersRequest,
 	fetchPlayersSuccess,
 	fetchPlayersFailure } from '../actions/playerActions';
@@ -27,6 +33,26 @@ export function fetchPlayers() {
     return axiosPlayer.get('/player').then(
       payload => dispatch(fetchPlayersSuccess(payload.data)),
       error => dispatch(fetchPlayersFailure(error))
+    );
+  };
+}
+
+export function updatePlayer(player) {
+  return (dispatch) => {
+		dispatch(updatePlayerRequest());
+    return axiosPlayer.put(`/player/${player._id}`, player).then(
+      payload => dispatch(updatePlayerSuccess(payload.data)),
+      error => dispatch(updatePlayerFailure(error))
+    );
+  };
+}
+
+export function deletePlayer(playerId) {
+  return (dispatch) => {
+		dispatch(deletePlayerRequest());
+    return axiosPlayer.delete(`/player/${playerId}`, playerId).then(
+      () => dispatch(deletePlayerSuccess(playerId)),
+      error => dispatch(deletePlayerFailure(error))
     );
   };
 }

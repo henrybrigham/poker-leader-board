@@ -60,7 +60,7 @@ class LeaderBoard extends React.PureComponent {
 						options={options}
 					/>
 				</div>
-				<button onClick={() => this.createPlayer}>Add</button>
+				<button onClick={this.createPlayer}>Add</button>
   		</div>
   	);
   }

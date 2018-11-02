@@ -9,6 +9,8 @@ const propTypes = {
 	players: PropTypes.array.isRequired,
 	fetchPlayers: PropTypes.func.isRequired,
 	createPlayer: PropTypes.func.isRequired,
+	updatePlayer: PropTypes.func.isRequired,
+	deletePlayer: PropTypes.func.isRequired,
 	isFetching: PropTypes.bool.isRequired,
 	error: PropTypes.bool.isRequired
 };
@@ -23,16 +25,17 @@ class LeaderBoard extends React.Component {
 	}
 
 	renderPlayers = () => {
-		const { players } = this.props;
-		const sortedPlayers = players.sort((a, b) => b - a);
+		const { players, updatePlayer, deletePlayer } = this.props;
 
-		const mappedPlayers = sortedPlayers.map((player, i) => <Player key={i} player={player} index={i}/>
+		const sortedPlayers = players.sort((a, b) => {return b.winnings - a.winnings});
+		const mappedPlayers = sortedPlayers.map((player, i) => 
+		<Player key={player._id} player={player} 			updatePlayer=	{updatePlayer} deletePlayer={deletePlayer} index={i}/>
 		);
+
 		return mappedPlayers;
 	}
 
   render() {
-		const { players } = this.props;
   	return (
 			<div className="column leaderBoard">
 				<h2 className="pageHeader">ALL-TIME TOURNAMENT EARNINGS</h2>
@@ -48,7 +51,7 @@ class LeaderBoard extends React.Component {
 					</div>
 				</div>
 				<div className="playerContainer">
-					{ Object.keys(players).length > 0 ?this.renderPlayers() : '' }
+					{ this.renderPlayers() }
 				</div>
 				<AddPlayer createPlayer={this.props.createPlayer} />
   		</div>

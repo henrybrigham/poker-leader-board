@@ -52,7 +52,7 @@ const actionHandlers = {
 		
 	[CREATE_PLAYER_SUCCESS]: (state, action) => (
 		updateObject(state, {
-			players: state.players.concat(action.player),
+			players: state.players.concat([action.player]),
 			isFetching: false,
 			error: false
 		})
@@ -73,16 +73,14 @@ const actionHandlers = {
 		
 	[UPDATE_PLAYER_SUCCESS]: (state, action) => {
 		const updatedPlayer = action.player;
-		const oldIndex = state.players.findIndex((player) => {
-			return player._id === updatedPlayer._id;
-		});
-
-		const updatedPlayers = state.players.splice(1, oldIndex, updatedPlayer);
+		const index = state.players.findIndex(player => player._id === updatedPlayer._id
+		);
+		let updatedPlayers = state.players.slice();
+		updatedPlayers.splice(index, 1, updatedPlayer);
 
 		return updateObject(state, {
 			players: updatedPlayers,
-			...state
-		})
+		});
 },
 
 	[UPDATE_PLAYER_FAILURE]: state =>
@@ -98,17 +96,13 @@ const actionHandlers = {
 		})
 	),
 		
-	[DELETE_PLAYER_SUCCESS]: (state, action) => {
-		const oldIndex = state.players.findIndex((player) => {
-			return player._id === updatedPlayer._id;
-		});
-
+	[DELETE_PLAYER_SUCCESS]: (state, action) => (
 		updateObject(state, {
-			players: state.players.splice(1, oldIndex),
+			players: state.players.filter(({ _id }) => _id !== action.playerId),
 			isFetching: false,
 			error: false
 		})
-	},
+	),
 
 	[DELETE_PLAYER_FAILURE]: state =>
 		updateObject(state, {

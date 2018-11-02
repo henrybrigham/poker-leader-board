@@ -6,7 +6,6 @@ const rootReducer = combineReducers({
 });
 
 const LeaderBoardApp = (state, action) => {
-	console.log('root', state, action);
   return rootReducer(state, action);
 };
 

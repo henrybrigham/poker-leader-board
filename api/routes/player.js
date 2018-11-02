@@ -13,7 +13,6 @@ router.get('/', function(req, res) {
 				res.status(500).send({ msg: 'Error getting all players', err: err });
 				return;
 			} if(!players){
-				console.log('none');
 				res.status(200).send("[]");
 				return;
 			}
@@ -39,7 +38,6 @@ router.get('/:playerId', function(req, res) {
 
 router.post('/', function(req, res){
 	const newPlayer = req.body;
-
   new PlayerModel(newPlayer).save(function(err, createdPlayer){
 		if (err) {
 			res.status(500);
@@ -51,19 +49,13 @@ router.post('/', function(req, res){
 });
 
 router.put('/:playerId', upload, function(req, res){
-	const player = JSON.parse(req.body.player);
-
-  // if (req.file) {
-  //   blog.image = '/uploads/blog/' + req.file.filename;
-  // }
-
-  PlayerModel.findByIdAndUpdate(
+	PlayerModel.findOneAndUpdate(
     req.params.playerId,
     {
       $set: {
-				name: player.name,
-        winnings: player.winnings,
-				country: player.country,
+				name: req.body.name,
+        winnings: req.body.winnings,
+				country: req.body.country,
       },
     },
     { new: true },
@@ -71,14 +63,14 @@ router.put('/:playerId', upload, function(req, res){
       if (err) {
         res.status(500).send({ msg: 'error updating player', err: err });
         return;
-      }
+			}
 			res.status(200).send(updatedPlayer);
   	}
   );
 });
 
 router.delete('/:playerId', function(req, res){
-	PlayerModel.findByIdAndRemove(
+	PlayerModel.findOneAndDelete(
     req.params.playerId,
     function(err) {
       if (err) {
