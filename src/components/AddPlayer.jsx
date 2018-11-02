@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import { isEmpty, isNumeric } from 'validator';
 import style from '../App.css';
 
 const propTypes = {
@@ -23,7 +24,8 @@ class LeaderBoard extends React.PureComponent {
 		this.state = {
 			name: '',
 			winnings: 0,
-			country: {}
+			country: {},
+			errorMessage: ''
 		}
 	}
 
@@ -38,29 +40,43 @@ class LeaderBoard extends React.PureComponent {
 	}
 
 	createPlayer = () => {
+		if (isEmpty(this.state.name.toString()) ||!this.state.country.value) {
+			this.setState({errorMessage: 'All fields must contain valid inputs'});
+  		return;
+		}
+
+		if (!isNumeric(this.state.winnings)) {
+			this.setState({errorMessage: 'Winnings must be a number'});
+  		return;
+		}
+		
 		const newPlayer = {
 			name: this.state.name,
 			winnings: this.state.winnings,
 			country: this.state.country.value
 		}
 		this.props.createPlayer(newPlayer);
+		this.setState({errorMessage: ''});
 	}
 
   render() {
   	return (
 			<div className={style.center}>
 				<h4 className="pageHeader">Add Player</h4>
-				<div className="row">
-					<input value={this.state.name} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
-					<input value={this.state.winnings} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'winnings'); } }/>
-					<Select
-						className='marketSelector'
-						value={this.state.country}
-						onChange={this.updateCountry}
-						options={options}
-					/>
-				</div>
-				<button onClick={this.createPlayer}>Add</button>
+				<form>
+					<div className="row">
+						<input value={this.state.name} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
+						<input value={this.state.winnings} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'winnings'); } }/>
+						<Select
+							className='marketSelector'
+							value={this.state.country}
+							onChange={this.updateCountry}
+							options={options}
+						/>
+					</div>
+					<p>{this.state.errorMessage}</p>
+					<button onClick={this.createPlayer}>Add</button>
+				</form>
   		</div>
   	);
   }

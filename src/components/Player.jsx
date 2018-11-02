@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import { isEmpty, isNumeric } from 'validator';
 import style from '../App.css';
 
 const options = [
@@ -37,7 +38,8 @@ class Player extends React.PureComponent {
           display : 'none'
         }
       },
-      editing : false,
+			editing : false,
+			errorMessage: ''
 		}
 	}
 
@@ -81,13 +83,24 @@ class Player extends React.PureComponent {
 	}
 
   updatePlayer = () => {
+		if (isEmpty(this.state.name.toString()) ||!this.state.country.value) {
+			this.setState({errorMessage: 'All fields must contain valid inputs'});
+  		return;
+		}
+
+		if (!isNumeric(this.state.winnings)) {
+			this.setState({errorMessage: 'Winnings must be a number'});
+  		return;
+		}
+
     const data = {
       _id: this.props.player._id,
       name: this.state.name,
       winnings: this.state.winnings,
       country: this.state.country.value,
     }
-    this.props.updatePlayer(data);
+		this.props.updatePlayer(data);
+		this.toggleOps();
   }
 
   render() {
@@ -128,7 +141,6 @@ class Player extends React.PureComponent {
 						<div className="penBox center point"
 							onClick={ () => {
 								this.updatePlayer();
-								this.toggleOps();
 							}}
 							>
 							<i className="fa fa-telegram" aria-hidden="true"></i>
@@ -143,32 +155,35 @@ class Player extends React.PureComponent {
 					</div>
 				</div>
 				<div style={this.state.style.input} className="column editPlayer">
-          <input
-            type='text'
-            className="input"
-            defaultValue={this.state.name}
-            onChange={ (evt) => {
-              this.setState({
-                name: evt.target.value
-              })
-            } }
-            />
-          <input
-            type='text'
-            className="input"
-            defaultValue={this.state.winnings}
-            onChange={ (evt) => {
-              this.setState({
-                winnings: evt.target.value,
-              })
-            } }
+					<form>
+						<input
+							type='text'
+							className="input"
+							defaultValue={this.state.name}
+							onChange={ (evt) => {
+								this.setState({
+									name: evt.target.value
+								})
+							} }
+							/>
+						<input
+							type='text'
+							className="input"
+							defaultValue={this.state.winnings}
+							onChange={ (evt) => {
+								this.setState({
+									winnings: evt.target.value,
+								})
+							} }
+							/>
+						<Select
+							className='marketSelector'
+							value={this.state.country}
+							onChange={this.updateCountry}
+							options={options}
 						/>
-					<Select
-						className='marketSelector'
-						value={this.state.country}
-						onChange={this.updateCountry}
-						options={options}
-					/>
+						<p className="error">{this.state.errorMessage}</p>
+					</form>
         </div>
   		</div>
   	);

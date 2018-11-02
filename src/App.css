@@ -172,8 +172,9 @@ h2 {
 	padding: 10px;
 }
 
-.player {
-
+.error {
+	color: red;
+	margin: 0;
 }
 
 @keyframes App-logo-spin {
