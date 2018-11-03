@@ -17,7 +17,7 @@ const propTypes = {
 	index: PropTypes.number.isRequired
 };
 
-class Player extends React.PureComponent {
+class Player extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -27,17 +27,6 @@ class Player extends React.PureComponent {
 			name: name,
 			winnings: winnings,
 			country: { value: country, label: country },
-			style : {
-        edit : {
-          display: 'none'
-        },
-        delete : {
-          display: 'flex'
-        },
-        input : {
-          display : 'none'
-        }
-      },
 			editing : false,
 			errorMessage: ''
 		}
@@ -46,33 +35,11 @@ class Player extends React.PureComponent {
 	toggleOps = () => {
     if (!this.state.editing) {
       this.setState({
-        style : {
-          edit : {
-            display: 'flex'
-          },
-          delete : {
-            display: 'none'
-          },
-          input : {
-            display : 'flex'
-          }
-        },
         editing : true
       })
     }
     else {
       this.setState({
-        style : {
-          edit : {
-            display: 'none'
-          },
-          delete : {
-            display : 'flex'
-          },
-          input : {
-            display : 'none'
-          }
-        },
         editing : false
       })
     }
@@ -105,6 +72,16 @@ class Player extends React.PureComponent {
 
   render() {
 		const { name, winnings, country } = this.props.player;
+		let editClass;
+		let deleteClass;
+
+		if(this.state.editing) {
+			editClass = 'visible';
+			deleteClass = 'invisible';
+		} else {
+			editClass = 'invisible';
+			deleteClass = 'visible';
+		}
 
 		return (
 			<div className="column">
@@ -119,8 +96,7 @@ class Player extends React.PureComponent {
 					<div className="otherSpace">
 						<p>{country}</p>
 					</div>
-					<div className="mLA row" 
-						style={this.state.style.delete}>
+					<div className={`mLA row ${deleteClass}`}>
 						<div className="penBox center point"
 							onClick={ () => {
 								this.toggleOps();
@@ -136,8 +112,7 @@ class Player extends React.PureComponent {
 							<i className="fa fa-minus-square" aria-hidden="true"></i>
 						</div>
 					</div>
-					<div className="mLA row" 
-						style={this.state.style.edit}>
+					<div className={`mLA row ${editClass}`}>
 						<div className="penBox center point"
 							onClick={ () => {
 								this.updatePlayer();
@@ -154,7 +129,7 @@ class Player extends React.PureComponent {
 						</div>
 					</div>
 				</div>
-				<div style={this.state.style.input} className="column editPlayer">
+				<div className={`column editPlayer ${editClass}`}>
 					<form>
 						<input
 							type='text'
