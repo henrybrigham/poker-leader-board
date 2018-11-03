@@ -39,13 +39,14 @@ class LeaderBoard extends React.PureComponent {
 		this.setState({country: selectedCountry});
 	}
 
-	createPlayer = () => {
+	createPlayer = (e) => {
+		e.preventDefault();
 		if (isEmpty(this.state.name.toString()) ||!this.state.country.value) {
 			this.setState({errorMessage: 'All fields must contain valid inputs'});
   		return;
 		}
 
-		if (!isNumeric(this.state.winnings)) {
+		if (!isNumeric(this.state.winnings.toString())) {
 			this.setState({errorMessage: 'Winnings must be a number'});
   		return;
 		}
@@ -75,7 +76,7 @@ class LeaderBoard extends React.PureComponent {
 						/>
 					</div>
 					<p>{this.state.errorMessage}</p>
-					<button onClick={this.createPlayer}>Add</button>
+					<button onClick={(e) => this.createPlayer(e)}>Add</button>
 				</form>
   		</div>
   	);

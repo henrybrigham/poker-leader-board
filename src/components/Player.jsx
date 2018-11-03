@@ -32,6 +32,10 @@ class Player extends React.Component {
 		}
 	}
 
+	componentDidMount(){
+		console.log('mounting biatch', this.props.player);
+	}
+
 	toggleOps = () => {
     if (!this.state.editing) {
       this.setState({
@@ -50,12 +54,13 @@ class Player extends React.Component {
 	}
 
   updatePlayer = () => {
+		console.log('the state', this.state);
 		if (isEmpty(this.state.name.toString()) ||!this.state.country.value) {
 			this.setState({errorMessage: 'All fields must contain valid inputs'});
   		return;
 		}
 
-		if (!isNumeric(this.state.winnings)) {
+		if (!isNumeric(this.state.winnings.toString())) {
 			this.setState({errorMessage: 'Winnings must be a number'});
   		return;
 		}
