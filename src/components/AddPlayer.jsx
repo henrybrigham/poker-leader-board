@@ -23,7 +23,7 @@ class LeaderBoard extends React.PureComponent {
 
 		this.state = {
 			name: '',
-			winnings: 0,
+			winnings: '',
 			country: {},
 			errorMessage: ''
 		}
@@ -57,7 +57,12 @@ class LeaderBoard extends React.PureComponent {
 			country: this.state.country.value
 		}
 		this.props.createPlayer(newPlayer);
-		this.setState({errorMessage: ''});
+		this.setState({
+			errorMessage: '',
+			name: '',
+			winnings: '',
+			country: {},
+		});
 	}
 
   render() {

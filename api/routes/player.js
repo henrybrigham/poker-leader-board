@@ -48,18 +48,12 @@ router.post('/', function(req, res){
 	});
 });
 
-router.put('/:playerId', upload, function(req, res){
+router.put('/:playerId', function(req, res){
 	PlayerModel.findOneAndUpdate(
-    req.params.playerId,
-    {
-      $set: {
-				name: req.body.name,
-        winnings: req.body.winnings,
-				country: req.body.country,
-      },
-    },
-    { new: true },
-    function(err, updatedPlayer) {
+    {_id: req.params.playerId},
+    req.body,
+		{new: true},
+		function(err, updatedPlayer) {
       if (err) {
         res.status(500).send({ msg: 'error updating player', err: err });
         return;

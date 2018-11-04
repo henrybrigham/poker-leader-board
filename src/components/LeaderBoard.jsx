@@ -26,7 +26,7 @@ class LeaderBoard extends React.Component {
 
 	renderPlayers = () => {
 		const { players, updatePlayer, deletePlayer } = this.props;
-		console.log('da playas', players);
+
 		const sortedPlayers = players.sort((a, b) => {return b.winnings - a.winnings});
 		const mappedPlayers = sortedPlayers.map((player, i) => 
 		<Player key={player._id} player={player} 			updatePlayer=	{updatePlayer} deletePlayer={deletePlayer} index={i}/>
