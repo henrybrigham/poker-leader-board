@@ -20,26 +20,6 @@ input {
 	padding-left: 8px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 .editPlayer {
 	opacity: 1;
 	animation-name: fadeInOpacity;
@@ -48,19 +28,6 @@ input {
 	animation-duration: 2s;
 }
 
-.exchangeContainer {
-	width: 40%;
-}
-
-.label {
-	color: silver;
-	margin-right: 10px;
-}
-
-.rate {
-	color: #1aff1a;
-	margin-right: 10px;
-}
 
 .row {
 	display: flex;
@@ -72,10 +39,6 @@ input {
 	flex-direction: column;
 }
 
-.even {
-	justify-content: space-evenly;
-}
-
 .center {
 	display: flex;
 	justify-content: center;
@@ -84,56 +47,6 @@ input {
 
 .mLA {
 	margin-left: auto;
-}
-
-.exchangeHeader {
-	padding: 10px;
-	border-bottom: 1px solid silver;
-}
-
-.sum {
-	margin-right: 5px;
-}
-
-.orderLogo {
-	height: 30px;
-	width: 30px;
-}
-
-.cell25 {
-	width: 25%;
-}
-
-.alignLeft {
-	display: flex;
-	justify-content: flex-start;
-}
-
-.alignRight {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.marketSelector {
-	width: 200px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 25px;
-}
-
-.header {
-	color: #1ad1ff;
-}
-
-.headerText {
-	font-size: 20px;
-	padding-bottom: 10px;
-	color: gold;
-}
-
-.coin {
-	padding-left: 5px;
-	color: silver;
 }
 
 .loader {
@@ -275,11 +188,6 @@ input {
 		font-size: 2em;
 		margin-bottom: 30px;
 	}
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 @keyframes fadeInOpacity {
