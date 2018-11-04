@@ -102,7 +102,7 @@ class LeaderBoard extends React.PureComponent {
 							value={this.state.winnings} 
 							onChange={ (evt) => { 	this.updatePlayer(evt.target.value, 'winnings'); } }/>
 						<Select
-							className='marketSelector'
+							className='countrySelector'
 							value={this.state.country}
 							onChange={this.updateCountry}
 							options={options}

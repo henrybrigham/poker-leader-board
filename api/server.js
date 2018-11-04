@@ -63,8 +63,6 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.use(express.static(path.resolve(__dirname + '/../src/')))
-
 ///////////////////////
 // Import/Use Routes //
 ///////////////////////

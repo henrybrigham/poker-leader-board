@@ -14,7 +14,7 @@ const propTypes = {
 	error: PropTypes.bool.isRequired
 };
 
-const LeaderBoardContainer = (props) =>		<LeaderBoard {...props}/>
+const LeaderBoardContainer = props =>		<LeaderBoard {...props}/>
 
 
 function mapStateToProps(state) {

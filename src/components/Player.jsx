@@ -37,7 +37,13 @@ class Player extends React.Component {
 	}
 
   render() {
-		const { name, winnings, country, imageUrl } = this.props.player;
+		const { 
+			name, 
+			winnings, 
+			country, 
+			imageUrl 
+		} = this.props.player;
+		
 		let editClass;
 		let deleteClass;
 

@@ -26,7 +26,10 @@ class UpdatePlayer extends React.Component {
 		this.state = {
 			name: name,
 			winnings: winnings,
-			country: { value: country, label: country },
+			country: { 
+				value: country, 
+				label: country 
+			},
 			editing : false,
 			errorMessage: '',
 			file: imageUrl,
@@ -105,7 +108,7 @@ class UpdatePlayer extends React.Component {
 							} }
 							/>
 						<Select
-							className='marketSelector'
+							className='countrySelector'
 							value={country}
 							onChange={this.updateCountry}
 							options={options}
