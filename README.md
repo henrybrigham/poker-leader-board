@@ -3,14 +3,15 @@
 ##RUN THE APP##
 
 For development:
-
-1. npm i
-2. in main directory
+1. cd api
+	a. mkdir uploads
+2. npm i
+3. in main directory
 	a. run npm start
-3. in /api
+4. in /api
 	a. run sudo mongod
 	b. run nodemon server.js
-4. Navigate to http://localhost:8080 to see app
+5. Navigate to http://localhost:8080 to see app
 
 For production:
 1. npm i
