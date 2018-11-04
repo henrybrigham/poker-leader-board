@@ -2,13 +2,22 @@ p {
 	margin: 0;
 }
 
-body {
-	background-color: #fafafa;
-}
-
 h2 {
 	text-align: center;
-	color: #CFD0D2;
+	color: black;
+}
+
+h4 {
+	text-align: center;
+	color: black;
+}
+
+input {
+	height: 40px;
+	width: 300px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	padding-left: 8px;
 }
 
 .App {
@@ -140,7 +149,7 @@ h2 {
 }
 
 .leaderBoard {
-	width: 40%;
+	width: 60%;
 }
 
 .playerContainer {
@@ -153,11 +162,11 @@ h2 {
 	height: 35px;
 	display: flex;
 	align-items: center;
-	padding: 5px 5px 5px 30px;
+	padding: 5px 5px 5px 5px;
 }
 
 .nameSpace {
-	width: 50%;
+	width: 46%;
 	display: flex;
 	align-items: center;
 }
@@ -169,7 +178,7 @@ h2 {
 }
 
 .index {
-	padding: 10px;
+	padding: 9px 5px 5px 5px;
 }
 
 .error {
@@ -185,6 +194,81 @@ h2 {
 	display: flex;
 }
 
+.penBox {
+	cursor: pointer;
+	padding: 5px;
+}
+
+.penBox:hover {
+	color: #078248;
+}
+
+.player {
+	padding: 5px 5px 5px 0px;
+}
+
+.country {
+	color: red;
+	margin-left: 10px;
+}
+
+.flag {
+	width: 35px;
+	height: 30px;
+}
+
+.name {
+	color: #cc0000;
+	font-size: 20px;
+}
+
+.fa {
+	font-size: 1.5em;
+}
+
+
+@media (max-width: 800px) {
+	.leaderBoard {
+		width: 90%;
+	}
+}
+
+@media (max-width: 450px) {
+	.leaderBoard {
+		width: 90%;
+	}
+
+	input {
+		width: 90%;
+	}
+
+	.flag {
+		width: 25px;
+		height: 20px;
+	}
+	
+	p {
+		font-size: 12px;
+	}
+
+	.name {
+    font-size: 15px;
+	}
+
+	.fa {
+		font-size: 1em;
+	}
+
+	h2 {
+		font-size: 20px;
+	}
+
+	.fa-2x {
+		font-size: 2em;
+		margin-bottom: 30px;
+	}
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -194,7 +278,7 @@ h2 {
 	0% {
 		opacity: 0;
 	}
-	100% {
+	20% {
 		opacity: 1;
 	}
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { isEmpty, isNumeric } from 'validator';
+import { options } from '../enumerations';
 import style from '../App.css';
 
 const propTypes = {
@@ -10,12 +11,6 @@ const propTypes = {
 	isFetching: PropTypes.bool.isRequired,
 	error: PropTypes.bool.isRequired
 };
-
-const options = [
-  { value: 'USA', label: 'USA' },
-  { value: 'MX', label: 'MX' },
-  { value: 'CA', label: 'CA' }
-];
 
 class LeaderBoard extends React.PureComponent {
 	constructor(props) {
@@ -68,11 +63,19 @@ class LeaderBoard extends React.PureComponent {
   render() {
   	return (
 			<div className={style.center}>
-				<h4 className="pageHeader">Add Player</h4>
+				<h4>Add Player</h4>
 				<form>
-					<div className="row">
-						<input value={this.state.name} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
-						<input value={this.state.winnings} onChange={ (evt) => { this.updatePlayer(evt.target.value, 'winnings'); } }/>
+					<div className="column center">
+						<input 
+							type='text'
+							placeholder="Name"
+							value={this.state.name} 
+							onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
+						<input 
+							type='text'
+							placeholder="Winnings"
+							value={this.state.winnings} 
+							onChange={ (evt) => { 	this.updatePlayer(evt.target.value, 'winnings'); } }/>
 						<Select
 							className='marketSelector'
 							value={this.state.country}
@@ -81,7 +84,10 @@ class LeaderBoard extends React.PureComponent {
 						/>
 					</div>
 					<p>{this.state.errorMessage}</p>
-					<button onClick={(e) => this.createPlayer(e)}>Add</button>
+					<div className="penBox center" onClick={
+						(e) => this.createPlayer(e)}>
+						<i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
+					</div>
 				</form>
   		</div>
   	);

@@ -73,18 +73,13 @@ const actionHandlers = {
 		
 	[UPDATE_PLAYER_SUCCESS]: (state, action) => {
 		const updatedPlayer = action.player;
-		console.log('update', updatedPlayer);
-
-		console.log('old', state.players);
 		const oldIndex = state.players.findIndex((player) => { 
 			return player._id === updatedPlayer._id
 		});
 
-		console.log('the index', oldIndex);
 		let updatedPlayers = state.players.slice();
 		updatedPlayers.splice(oldIndex, 1, updatedPlayer);
 
-		console.log('new', updatedPlayers);
 		return updateObject(state, {
 			players: updatedPlayers,
 			isFetching: false,

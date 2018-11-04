@@ -3,13 +3,8 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { isEmpty, isNumeric } from 'validator';
 import UpdatePlayer from './UpdatePlayer';
+import { images } from '../enumerations';
 import style from '../App.css';
-
-const options = [
-  { value: 'USA', label: 'USA' },
-  { value: 'MX', label: 'MX' },
-  { value: 'CA', label: 'CA' }
-];
 
 const propTypes = {
 	player: PropTypes.object.isRequired,
@@ -54,20 +49,22 @@ class Player extends React.Component {
 			deleteClass = 'visible';
 		}
 
+		const source = images[country];
 		return (
-			<div className="column">
-				<div className="row">
-					<div className="index">{this.props.index}</div>
+			<div className="column player">
+				<div className={`row ${deleteClass}`}>
+					<div className="index">{this.props.index + 1}.</div>
 					<div className="nameSpace">
-						<p>{name}</p>
+						<p className="name">{name}</p>
 					</div>
 					<div className="otherSpace">
-						<p>{winnings}</p>
+						<p>${winnings}M</p>
 					</div>
 					<div className="otherSpace">
-						<p>{country}</p>
+						<img src={source} alt="flag" className="flag"/>
+						<p className="country">{country}</p>
 					</div>
-					<div className={`mLA row ${deleteClass}`}>
+					<div className="mLA row">
 						<div className="penBox center point"
 							onClick={ () => {
 								this.toggleOps();

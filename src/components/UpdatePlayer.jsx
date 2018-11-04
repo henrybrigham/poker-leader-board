@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { isEmpty, isNumeric } from 'validator';
+import { options } from '../enumerations';
 import style from '../App.css';
 
-const options = [
-  { value: 'USA', label: 'USA' },
-  { value: 'MX', label: 'MX' },
-  { value: 'CA', label: 'CA' }
-];
 
 const propTypes = {
 	player: PropTypes.object.isRequired,
@@ -53,7 +49,7 @@ class UpdatePlayer extends React.Component {
       winnings: this.state.winnings,
       country: this.state.country.value,
 		}
-		console.log('data', data);
+
 		this.props.updatePlayer(data);
 		this.props.toggleOps();
   }
@@ -63,15 +59,47 @@ class UpdatePlayer extends React.Component {
 
 		return (
 			<div className="column editPlayer">
-				<div className="mLA row">
-					<div className="penBox center point"
+				<form>
+					<h4>Update Player</h4>
+					<div className="column center">
+						<input
+							type='text'
+							placeholder="Name"						className="input"
+							defaultValue={name}
+							onChange={ (evt) => {
+								this.setState({
+									name: evt.target.value
+								})
+							} }
+							/>
+						<input
+							type='text'
+							placeholder="Winnings"				className="input"
+							defaultValue={winnings}
+							onChange={ (evt) => {
+								this.setState({
+									winnings: evt.target.value,
+								})
+							} }
+							/>
+						<Select
+							className='marketSelector'
+							value={country}
+							onChange={this.updateCountry}
+							options={options}
+						/>
+						<p className="error">{errorMessage}</p>
+					</div>
+				</form>
+				<div className="center row">
+					<div className="penBox"
 						onClick={ (e) => {
 							this.updatePlayer(e);
 						}}
 						>
 						<i className="fa fa-telegram" aria-hidden="true"></i>
 					</div>
-					<div className="penBox center point"
+					<div className="penBox"
 						onClick={ () => {
 							this.props.toggleOps();
 						}}
@@ -79,35 +107,6 @@ class UpdatePlayer extends React.Component {
 						<i className="fa fa-window-close" aria-hidden="true"></i>
 					</div>
 				</div>
-				<form>
-					<input
-						type='text'
-						className="input"
-						defaultValue={name}
-						onChange={ (evt) => {
-							this.setState({
-								name: evt.target.value
-							})
-						} }
-						/>
-					<input
-						type='text'
-						className="input"
-						defaultValue={winnings}
-						onChange={ (evt) => {
-							this.setState({
-								winnings: evt.target.value,
-							})
-						} }
-						/>
-					<Select
-						className='marketSelector'
-						value={country}
-						onChange={this.updateCountry}
-						options={options}
-					/>
-					<p className="error">{errorMessage}</p>
-				</form>
 			</div>
   	);
   }

@@ -70,7 +70,6 @@ app.use('/player', player);
 //////////////
 // Mongoose //
 //////////////
-// mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/leaderBoard', { useNewUrlParser: true });
 const PlayerModel = require('./models/player.model')(mongoose);
