@@ -53,16 +53,14 @@ export const updatePlayerFailure = (error) => ({
 	error
 });
 
-export const deletePlayerRequest = (playerId) => ({
-	type: DELETE_PLAYER_REQUEST,
-	playerId
+export const deletePlayerRequest = () => ({
+	type: DELETE_PLAYER_REQUEST
 });
 
 export const deletePlayerSuccess = (playerId) => ({
 	type: DELETE_PLAYER_SUCCESS, playerId
 });
 
-export const deletePlayerFailure = (error) => ({
-	type: DELETE_PLAYER_FAILURE,
-	error
+export const deletePlayerFailure = () => ({
+	type: DELETE_PLAYER_FAILURE
 });

@@ -12,10 +12,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 const propTypes = {
-	players: PropTypes.array,
-	createPlayer: PropTypes.func.isRequired,
-	isFetching: PropTypes.bool.isRequired,
-	error: PropTypes.bool.isRequired
+	createPlayer: PropTypes.func.isRequired
 };
 
 class LeaderBoard extends React.PureComponent {
@@ -43,7 +40,6 @@ class LeaderBoard extends React.PureComponent {
 	}
 
 	handleChange(event) {
-		console.log('event', event.target.files[0]);
     this.setState({
 			file: URL.createObjectURL(event.target.files[0]),
 			upload: event.target.files[0]
@@ -82,6 +78,8 @@ class LeaderBoard extends React.PureComponent {
 			name: '',
 			winnings: '',
 			country: {},
+			file: '',
+			upload: null
 		});
 	}
 
@@ -93,11 +91,13 @@ class LeaderBoard extends React.PureComponent {
 					<div className="column center">
 						<input 
 							type='text'
+							className="updateName"
 							placeholder="Name"
 							value={this.state.name} 
 							onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
 						<input 
 							type='text'
+							className="updateWinnings"
 							placeholder="Winnings"
 							value={this.state.winnings} 
 							onChange={ (evt) => { 	this.updatePlayer(evt.target.value, 'winnings'); } }/>
