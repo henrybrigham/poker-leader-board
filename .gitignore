@@ -1,6 +1,3 @@
 node_modules
-build
 dist/bundle.js
 coverage
-api/data
-api/uploads
