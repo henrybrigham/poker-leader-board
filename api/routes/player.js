@@ -2,7 +2,7 @@ const express    = require('express');
 const router     = express.Router();
 const gar        = global.appRoot;
 const multer     = require('multer');
-const upload = multer({ dest: `${gar}/uploads/picture` }).single('picture');
+const upload = multer({ dest: `${gar}/uploads` }).single('picture');
 const PlayerModel = require(`${gar}/models/player.model`);
 
 router.get('/', function(req, res) {
