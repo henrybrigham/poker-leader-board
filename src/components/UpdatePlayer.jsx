@@ -16,7 +16,12 @@ class UpdatePlayer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const { name, winnings, country, imageUrl } = props.player;
+		const { 
+			name, 
+			winnings, 
+			country, 
+			imageUrl 
+		} = props.player;
 
 		this.state = {
 			name: name,
