@@ -54,7 +54,7 @@ class Player extends React.Component {
 			<div className="column player">
 				<div className={`row ${deleteClass}`}>
 					<div className="index">{this.props.index + 1}.</div>
-					{ imageUrl ? <img src={imageUrl}/> : ''}
+					{ imageUrl ? <img src={imageUrl} alt="profile" className="profilePicture" /> : ''}
 					<div className="nameSpace">
 						<p className="name">{name}</p>
 					</div>

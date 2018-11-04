@@ -21,15 +21,10 @@ export function createPlayer(player) {
   return (dispatch) => {
 		dispatch(createPlayerRequest());
 		let formData = new FormData();
-		formData.append('picture', player.file);
+		formData.append('picture', player.upload);
 		formData.append('player', JSON.stringify(player));
-		const config = {
-			headers: {
-				'content-type': 'multipart/form-data'
-			}
-		};
 
-    return axiosPlayer.post('/player', formData, config).then(
+    return axiosPlayer.post('/player', formData).then(
       payload => dispatch(createPlayerSuccess(payload.data)),
       error => dispatch(createPlayerFailure(error))
     );
@@ -49,7 +44,12 @@ export function fetchPlayers() {
 export function updatePlayer(player) {
   return (dispatch) => {
 		dispatch(updatePlayerRequest());
-    return axiosPlayer.put(`/player/${player._id}`, player).then(
+		console.log('playa', player);
+		let formData = new FormData();
+		formData.append('picture', player.upload);
+		formData.append('player', JSON.stringify(player));
+
+    return axiosPlayer.put(`/player/${player._id}`, formData).then(
       payload => dispatch(updatePlayerSuccess(payload.data)),
       error => dispatch(updatePlayerFailure(error))
     );

@@ -229,6 +229,11 @@ input {
 	height: 50%;
 }
 
+.profilePicture {
+	width: 35px;
+	height: 35px;
+}
+
 @media (max-width: 800px) {
 	.leaderBoard {
 		width: 90%;

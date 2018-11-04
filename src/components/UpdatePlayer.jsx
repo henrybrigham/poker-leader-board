@@ -16,20 +16,29 @@ class UpdatePlayer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const { name, winnings, country } = props.player;
+		const { name, winnings, country, imageUrl } = props.player;
 
 		this.state = {
 			name: name,
 			winnings: winnings,
 			country: { value: country, label: country },
 			editing : false,
-			errorMessage: ''
+			errorMessage: '',
+			file: imageUrl,
+			upload: null
 		}
 	}
 	
 	updateCountry = (country) => {
 		this.setState({country});
 	}
+
+	handleChange(event) {
+    this.setState({
+			file: URL.createObjectURL(event.target.files[0]),
+			upload: event.target.files[0]
+    });
+  }
 
   updatePlayer = (e) => {
 		e.preventDefault();
@@ -43,11 +52,19 @@ class UpdatePlayer extends React.Component {
   		return;
 		}
 
+		if (!this.state.upload) {
+			this.setState({errorMessage: 'Please upload an image'});
+  		return;
+		}
+
     const data = {
       _id: this.props.player._id,
       name: this.state.name,
       winnings: this.state.winnings,
-      country: this.state.country.value,
+			country: this.state.country.value,
+			imageUrl: this.state.imageUrl,
+			upload: this.state.upload ? this.state.upload : null,
+			fileName: this.state.upload ?this.state.upload.name : null
 		}
 
 		this.props.updatePlayer(data);
@@ -88,6 +105,10 @@ class UpdatePlayer extends React.Component {
 							onChange={this.updateCountry}
 							options={options}
 						/>
+						<input type="file" onChange={ (event) => this.handleChange(event) }/>
+						{ this.state.file ? 
+							<img className="drop" alt="preview"
+						src={this.state.file}/> : '' }
 						<p className="error">{errorMessage}</p>
 					</div>
 				</form>

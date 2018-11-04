@@ -2,8 +2,11 @@ const express    = require('express');
 const router     = express.Router();
 const gar        = global.appRoot;
 const multer     = require('multer');
-const upload = multer({ dest: `${gar}/uploads` }).single('picture');
+
 const PlayerModel = require(`${gar}/models/player.model`);
+
+// create the multer instance that will be used to upload/save the file
+const upload = multer({ dest: `${gar}/uploads` });
 
 router.get('/', function(req, res) {
 	PlayerModel.find(
@@ -36,12 +39,10 @@ router.get('/:playerId', function(req, res) {
 	);
 });
 
-router.post('/', upload, function(req, res){
-	console.log('pic', req.body.picture);
-
+router.post('/', upload.single('picture'), function(req, res){
 	let newPlayer = JSON.parse(req.body.player);
 	
-	newPlayer.imageUrl = '/uploads/' + req.body.picture;
+	newPlayer.imageUrl = 'http://localhost:8000/uploads/' + req.file.filename;
 	
   new PlayerModel(newPlayer).save(function(err, createdPlayer){
 		if (err) {
@@ -54,10 +55,17 @@ router.post('/', upload, function(req, res){
 	});
 });
 
-router.put('/:playerId', function(req, res){
+router.put('/:playerId', upload.single('picture'), function(req, res){
+	console.log('****player', req.body);
+	let updatedPlayer = JSON.parse(req.body.player);
+	
+	if (req.file) {
+		updatedPlayer.imageUrl = 'http://localhost:8000/uploads/' + req.file.filename;
+	}
+
 	PlayerModel.findOneAndUpdate(
     {_id: req.params.playerId},
-    req.body,
+    updatedPlayer,
 		{new: true},
 		function(err, updatedPlayer) {
       if (err) {

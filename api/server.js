@@ -10,7 +10,6 @@ const helmet     = require('helmet');
 const mongoose = require("mongoose");
 const app        = module.exports = express();
 const axios 	   = require("axios");
-const Helpers = require('./helpers');
 const session    = require('client-sessions');
 
 ////////////////
@@ -62,10 +61,6 @@ app.use(cors({
 app.use(function(req, res, next) {
 	console.log(req.url);
 	next();
-});
-
-app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'))
 });
 
 app.use(express.static(path.resolve(__dirname + '/../src/')))

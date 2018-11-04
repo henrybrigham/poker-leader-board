@@ -27,7 +27,8 @@ class LeaderBoard extends React.PureComponent {
 			winnings: '',
 			country: {},
 			errorMessage: '',
-			file: null
+			file: '',
+			upload: null
 		}
 	}
 
@@ -44,7 +45,8 @@ class LeaderBoard extends React.PureComponent {
 	handleChange(event) {
 		console.log('event', event.target.files[0]);
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
+			file: URL.createObjectURL(event.target.files[0]),
+			upload: event.target.files[0]
     });
   }
 
@@ -59,12 +61,19 @@ class LeaderBoard extends React.PureComponent {
 			this.setState({errorMessage: 'Winnings must be a number'});
   		return;
 		}
+
+
+		if (!this.state.upload) {
+			this.setState({errorMessage: 'Please upload an image'});
+  		return;
+		}
 		
 		const newPlayer = {
 			name: this.state.name,
 			winnings: this.state.winnings,
 			country: this.state.country.value,
-			file: this.state.file
+			upload: this.state.upload,
+			fileName: this.state.upload.name
 		}
 
 		this.props.createPlayer(newPlayer);
@@ -99,8 +108,9 @@ class LeaderBoard extends React.PureComponent {
 							options={options}
 						/>
 						<input type="file" onChange={ (event) => this.handleChange(event) }/>
-						<img className="drop"
-						src={this.state.file}/>
+						{ this.state.file ? 
+							<img className="drop" alt="preview"
+						src={this.state.file}/> : '' }
 					</div>
 					<p className="error">{this.state.errorMessage}</p>
 					<div className="penBox center" 
