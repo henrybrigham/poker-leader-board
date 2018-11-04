@@ -36,12 +36,18 @@ router.get('/:playerId', function(req, res) {
 	);
 });
 
-router.post('/', function(req, res){
-	const newPlayer = req.body;
+router.post('/', upload, function(req, res){
+	console.log('pic', req.body.picture);
+
+	let newPlayer = JSON.parse(req.body.player);
+	
+	newPlayer.imageUrl = '/uploads/' + req.body.picture;
+	
   new PlayerModel(newPlayer).save(function(err, createdPlayer){
 		if (err) {
+			console.log('**error', err);
 			res.status(500);
-			res.send("Error creating player");
+			res.send("Error creating player", error);
 			return;
 		}
 		res.send(JSON.stringify(createdPlayer));

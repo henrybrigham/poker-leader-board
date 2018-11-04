@@ -12,5 +12,9 @@ module.exports = mongoose.model('Player', {
 	country: {
 		type: String,
 		required: true
+	},
+	imageUrl: {
+		type: String,
+		required: true
 	}
 }, 'player');

@@ -20,13 +20,6 @@ input {
 	padding-left: 8px;
 }
 
-.App {
-	background-color: #29313d;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -184,6 +177,7 @@ input {
 .error {
 	color: red;
 	margin: 0;
+	text-align: center;
 }
 
 .invisible {
@@ -230,6 +224,10 @@ input {
 	font-size: 2.5em;
 }
 
+.drop {
+	width: 50%;
+	height: 50%;
+}
 
 @media (max-width: 800px) {
 	.leaderBoard {

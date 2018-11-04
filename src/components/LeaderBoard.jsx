@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Loader from '../assets/loading.gif';
 import AddPlayer from './AddPlayer';
 import Player from './Player';
+import loading from '../assets/loading.gif';
 import style from '../App.css';
 
 const propTypes = {
@@ -25,17 +26,23 @@ class LeaderBoard extends React.Component {
 	}
 
 	renderPlayers = () => {
-		const { players, updatePlayer, deletePlayer } = this.props;
-
-		const sortedPlayers = players.sort((a, b) => {return b.winnings - a.winnings});
-		const mappedPlayers = sortedPlayers.map((player, i) => 
-		<Player key={player._id} player={player} 			updatePlayer=	{updatePlayer} deletePlayer={deletePlayer} index={i}/>
-		);
-
-		return mappedPlayers;
+		const { players, updatePlayer, deletePlayer, isFetching } = this.props;
+		if (isFetching) {
+			console.log('loading');
+			return <img alt="loader" className='loader' src={loading} />;
+		} else {
+			const sortedPlayers = players.sort((a, b) => {return b.winnings - a.winnings});
+			const mappedPlayers = sortedPlayers.map((player, i) => 
+			<Player key={player._id} player={player} 			updatePlayer=	{updatePlayer} deletePlayer={deletePlayer} index={i}/>
+			);
+	
+			return mappedPlayers;
+		}
 	}
 
   render() {
+
+		console.log('playas', this.props.players);
   	return (
 			<div className="column leaderBoard">
 				<h2 className="pageHeader">ALL-TIME TOURNAMENT EARNINGS</h2>

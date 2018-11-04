@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import { FilePond, File, registerPlugin } from 'react-filepond';
 import { isEmpty, isNumeric } from 'validator';
 import { options } from '../enumerations';
 import style from '../App.css';
+import 'filepond/dist/filepond.min.css';
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 const propTypes = {
 	players: PropTypes.array,
@@ -20,7 +26,8 @@ class LeaderBoard extends React.PureComponent {
 			name: '',
 			winnings: '',
 			country: {},
-			errorMessage: ''
+			errorMessage: '',
+			file: null
 		}
 	}
 
@@ -33,6 +40,13 @@ class LeaderBoard extends React.PureComponent {
 	updateCountry = (selectedCountry) => {
 		this.setState({country: selectedCountry});
 	}
+
+	handleChange(event) {
+		console.log('event', event.target.files[0]);
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    });
+  }
 
 	createPlayer = (e) => {
 		e.preventDefault();
@@ -49,8 +63,10 @@ class LeaderBoard extends React.PureComponent {
 		const newPlayer = {
 			name: this.state.name,
 			winnings: this.state.winnings,
-			country: this.state.country.value
+			country: this.state.country.value,
+			file: this.state.file
 		}
+
 		this.props.createPlayer(newPlayer);
 		this.setState({
 			errorMessage: '',
@@ -82,10 +98,15 @@ class LeaderBoard extends React.PureComponent {
 							onChange={this.updateCountry}
 							options={options}
 						/>
+						<input type="file" onChange={ (event) => this.handleChange(event) }/>
+						<img className="drop"
+						src={this.state.file}/>
 					</div>
-					<p>{this.state.errorMessage}</p>
-					<div className="penBox center" onClick={
-						(e) => this.createPlayer(e)}>
+					<p className="error">{this.state.errorMessage}</p>
+					<div className="penBox center" 
+						onClick={
+							(e) => this.createPlayer(e)
+						}>
 						<i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
 					</div>
 				</form>

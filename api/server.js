@@ -1,6 +1,7 @@
 //////////////////
 // Dependencies //
 //////////////////
+const path = require('path');
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors       = require('cors');
@@ -15,6 +16,8 @@ const session    = require('client-sessions');
 ////////////////
 // Misc Setup //
 ////////////////
+app.use('/uploads/', express.static(__dirname+'/uploads'));
+
 app.locals.basedir = __dirname;
 const gar = global.appRoot = app.locals.basedir;
 
@@ -60,6 +63,12 @@ app.use(function(req, res, next) {
 	console.log(req.url);
 	next();
 });
+
+app.get('/', function(req, res) {
+  res.sendFile(path.resolve(__dirname + '/../dist/index.html'))
+});
+
+app.use(express.static(path.resolve(__dirname + '/../src/')))
 
 ///////////////////////
 // Import/Use Routes //

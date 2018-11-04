@@ -20,7 +20,16 @@ const axiosPlayer = axios.create({
 export function createPlayer(player) {
   return (dispatch) => {
 		dispatch(createPlayerRequest());
-    return axiosPlayer.post('/player', player).then(
+		let formData = new FormData();
+		formData.append('picture', player.file);
+		formData.append('player', JSON.stringify(player));
+		const config = {
+			headers: {
+				'content-type': 'multipart/form-data'
+			}
+		};
+
+    return axiosPlayer.post('/player', formData, config).then(
       payload => dispatch(createPlayerSuccess(payload.data)),
       error => dispatch(createPlayerFailure(error))
     );

@@ -37,7 +37,7 @@ class Player extends React.Component {
 	}
 
   render() {
-		const { name, winnings, country } = this.props.player;
+		const { name, winnings, country, imageUrl } = this.props.player;
 		let editClass;
 		let deleteClass;
 
@@ -54,6 +54,7 @@ class Player extends React.Component {
 			<div className="column player">
 				<div className={`row ${deleteClass}`}>
 					<div className="index">{this.props.index + 1}.</div>
+					{ imageUrl ? <img src={imageUrl}/> : ''}
 					<div className="nameSpace">
 						<p className="name">{name}</p>
 					</div>
