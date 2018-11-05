@@ -14,7 +14,7 @@ For development:
 	a. npm start
 4. in /api run
 	a. sudo mongod
-	b. NODE_ENV=production node server.js
+	b. NODE_ENV=development node server.js
 5. Navigate to http://localhost:8080 to see app
 
 For production:
