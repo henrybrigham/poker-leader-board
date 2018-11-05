@@ -51,7 +51,7 @@ export function fetchPlayers() {
 export function updatePlayer(player) {
   return (dispatch) => {
 		dispatch(updatePlayerRequest());
-		console.log('playa', player);
+
 		let formData = new FormData();
 		formData.append('picture', player.upload);
 		formData.append('player', JSON.stringify(player));
