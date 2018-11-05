@@ -41,8 +41,15 @@ router.get('/:playerId', function(req, res) {
 
 router.post('/', upload.single('picture'), function(req, res){
 	let newPlayer = JSON.parse(req.body.player);
-	
-	newPlayer.imageUrl = 'http://localhost:8000/uploads/' + req.file.filename;
+	let apiUrl;
+
+	if(process.env.NODE_ENV === 'development') {
+		apiUrl = 'http://localhost:8000';
+	} else {
+		apiUrl = 'http://68.183.110.66:8000';
+	}
+
+	newPlayer.imageUrl = apiUrl + req.file.filename;
 	
   new PlayerModel(newPlayer).save(function(err, createdPlayer){
 		if (err) {
