@@ -13,8 +13,15 @@ import {
 	fetchPlayersSuccess,
 	fetchPlayersFailure } from '../actions/playerActions';
 
+let apiUrl;
+if(process.env.NODE_ENV === 'development') {
+	apiUrl = 'http://localhost:8000';
+} else {
+	apiUrl = 'http://68.183.110.66/:8000';
+}
+
 const axiosPlayer = axios.create({
-	baseURL: 'http://localhost:8000'
+	baseURL: apiUrl
 });
 
 export function createPlayer(player) {
