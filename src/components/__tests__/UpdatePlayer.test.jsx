@@ -75,7 +75,7 @@ describe('<UpdatePlayer />', () => {
 			preventDefault: jest.fn()
 		}
 		wrapper.instance().updatePlayer(e);
-		expect(wrapper.state().errorMessage).toEqual('Please upload an image');
+		expect(wrapper.state().errorMessage).toEqual('Please upload a new image');
 	});
 
 	it('updatePlayer sets state.errorMessage correctly', () => {
@@ -113,7 +113,7 @@ describe('<UpdatePlayer />', () => {
 		});		
 
 		wrapper.instance().updatePlayer(e);
-		expect(wrapper.state().errorMessage).toEqual('Please upload an image');
+		expect(wrapper.state().errorMessage).toEqual('Please upload a new image');
 	});
 });
 

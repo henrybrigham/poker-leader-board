@@ -61,7 +61,7 @@ class UpdatePlayer extends React.Component {
 		}
 
 		if (!this.state.upload) {
-			this.setState({errorMessage: 'Please upload an image'});
+			this.setState({errorMessage: 'Please upload a new image'});
   		return;
 		}
 
