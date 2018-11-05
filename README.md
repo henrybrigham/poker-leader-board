@@ -32,6 +32,8 @@ For production:
 #NOTE#
 If running the production build you may need to change the port in server.js to whatever fits your devops needs.
 
+This App is currently hosted at http://68.183.110.66/ !
+
 ##TESTING##
 1. npm i
 2. npm run test
