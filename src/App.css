@@ -28,7 +28,6 @@ input {
 	animation-duration: 2s;
 }
 
-
 .row {
 	display: flex;
 	flex-direction: row;
@@ -119,6 +118,7 @@ input {
 
 .player {
 	padding: 5px 5px 5px 0px;
+	border-bottom: 1px solid silver;
 }
 
 .country {
