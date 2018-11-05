@@ -8,7 +8,7 @@ const PlayerModel = require(`${gar}/models/player.model`);
 // create the multer instance that will be used to upload/save the file
 const upload = multer({ dest: `${gar}/uploads` });
 
-const apiUrl ='http://localhost:8000/uploads/';
+const apiUrl = 'http://localhost:8000/uploads/';
 
 router.get('/', function(req, res) {
 	PlayerModel.find(
