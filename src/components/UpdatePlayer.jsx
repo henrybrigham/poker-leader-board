@@ -122,17 +122,11 @@ class UpdatePlayer extends React.Component {
         </form>
         <div className="center row">
           <div className="penBox"
-						onClick={ (e) => {
-						  this.updatePlayer(e);
-						} }
-						>
+						onClick={ this.updatePlayer }>
             <i className="fa fa-telegram" aria-hidden="true"></i>
           </div>
           <div className="penBox"
-						onClick={ () => {
-						  this.props.toggleOps();
-						} }
-						>
+						onClick={ this.props.toggleOps }>
             <i className="fa fa-window-close" aria-hidden="true"></i>
           </div>
         </div>
