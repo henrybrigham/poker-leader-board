@@ -1,35 +1,28 @@
 import axios from 'axios';
 import { 
-	createPlayerRequest, 
-	createPlayerSuccess, 
-	createPlayerFailure,
-	deletePlayerRequest, 
-	deletePlayerSuccess, 
-	deletePlayerFailure,
-	updatePlayerRequest, 
-	updatePlayerSuccess, 
-	updatePlayerFailure,
-	fetchPlayersRequest,
-	fetchPlayersSuccess,
-	fetchPlayersFailure } from '../actions/playerActions';
-
-let apiUrl;
-if(process.env.NODE_ENV === 'development') {
-	apiUrl = 'http://localhost:8000';
-} else {
-	apiUrl = 'http://68.183.110.66:8000';
-}
+  createPlayerRequest, 
+  createPlayerSuccess, 
+  createPlayerFailure,
+  deletePlayerRequest, 
+  deletePlayerSuccess, 
+  deletePlayerFailure,
+  updatePlayerRequest, 
+  updatePlayerSuccess, 
+  updatePlayerFailure,
+  fetchPlayersRequest,
+  fetchPlayersSuccess,
+  fetchPlayersFailure } from '../actions/playerActions';
 
 const axiosPlayer = axios.create({
-	baseURL: apiUrl
+  baseURL: 'http://localhost:8000'
 });
 
 export function createPlayer(player) {
   return (dispatch) => {
-		dispatch(createPlayerRequest());
-		let formData = new FormData();
-		formData.append('picture', player.upload);
-		formData.append('player', JSON.stringify(player));
+    dispatch(createPlayerRequest());
+    let formData = new FormData();
+    formData.append('picture', player.upload);
+    formData.append('player', JSON.stringify(player));
 
     return axiosPlayer.post('/player', formData).then(
       payload => dispatch(createPlayerSuccess(payload.data)),
@@ -40,7 +33,7 @@ export function createPlayer(player) {
 
 export function fetchPlayers() {
   return (dispatch) => {
-		dispatch(fetchPlayersRequest());
+    dispatch(fetchPlayersRequest());
     return axiosPlayer.get('/player').then(
       payload => dispatch(fetchPlayersSuccess(payload.data)),
       error => dispatch(fetchPlayersFailure(error))
@@ -50,11 +43,11 @@ export function fetchPlayers() {
 
 export function updatePlayer(player) {
   return (dispatch) => {
-		dispatch(updatePlayerRequest());
+    dispatch(updatePlayerRequest());
 
-		let formData = new FormData();
-		formData.append('picture', player.upload);
-		formData.append('player', JSON.stringify(player));
+    let formData = new FormData();
+    formData.append('picture', player.upload);
+    formData.append('player', JSON.stringify(player));
 
     return axiosPlayer.put(`/player/${player._id}`, formData).then(
       payload => dispatch(updatePlayerSuccess(payload.data)),
@@ -65,7 +58,7 @@ export function updatePlayer(player) {
 
 export function deletePlayer(playerId) {
   return (dispatch) => {
-		dispatch(deletePlayerRequest());
+    dispatch(deletePlayerRequest());
     return axiosPlayer.delete(`/player/${playerId}`, playerId).then(
       () => dispatch(deletePlayerSuccess(playerId)),
       error => dispatch(deletePlayerFailure(error))

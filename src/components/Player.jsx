@@ -73,10 +73,7 @@ class Player extends React.Component {
 					</div>
 					<div className="mLA row">
 						<div className="penBox center point"
-							onClick={ () => {
-								this.toggleOps();
-							}}
-							>
+							onClick={this.toggleOps}>
 							<i className="fa fa-pencil" aria-hidden="true"></i>
 						</div>
 						<div className="penBox center point"

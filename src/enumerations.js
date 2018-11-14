@@ -7,17 +7,17 @@ import japaneseFlag from './assets/flags/japan.jpeg';
 const options = [
   { value: 'USA', label: 'USA' },
   { value: 'MX', label: 'MX' },
-	{ value: 'CA', label: 'CA' },
-	{ value: 'GBA', label: 'GBA' },
-	{ value: 'JA', label: 'JA' }
+  { value: 'CA', label: 'CA' },
+  { value: 'GBA', label: 'GBA' },
+  { value: 'JA', label: 'JA' }
 ];
 
 const images = {
-	'USA': americanFlag,
-	'MX': mexicanFlag,
-	'CA': canadianFlag,
-	'GBA': britishFlag,
-	'JA': japaneseFlag,
-}
+  'USA': americanFlag,
+  'MX': mexicanFlag,
+  'CA': canadianFlag,
+  'GBA': britishFlag,
+  'JA': japaneseFlag,
+};
 
 module.exports = { options, images };

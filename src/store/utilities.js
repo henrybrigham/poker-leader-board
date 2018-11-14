@@ -13,16 +13,16 @@ export function updateObject(oldObject, newValues) {
 }
 
 export function makeActionCreator(type, ...argNames) {
-	return (...args) => {
-			const action = {
-					type,
-					isFetching: false,
-					didInvalidate: false
-			};
-			argNames.forEach((arg, index) => {
-					action[argNames[index]] = args[index];
-			});
+  return (...args) => {
+    const action = {
+      type,
+      isFetching: false,
+      didInvalidate: false
+    };
+    argNames.forEach((arg, index) => {
+      action[argNames[index]] = args[index];
+    });
 
-			return action;
-	};
+    return action;
+  };
 }
