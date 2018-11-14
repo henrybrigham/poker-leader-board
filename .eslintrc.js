@@ -16,14 +16,35 @@ module.exports = {
 			"react"
 	],
 	"rules": {
+		"no-mixed-spaces-and-tabs": [2, true],
 		"react/jsx-boolean-value": [0],
 		"no-unused-vars" : [ "warn" ],
 		"no-console" : [ "warn" ],
 		"import/no-extraneous-dependencies": [ 0 ],
-			"indent": [
-					"error",
-					2
-			],
+		indent: ['error', 2, {
+      SwitchCase: 1,
+      VariableDeclarator: 1,
+      outerIIFEBody: 1,
+      // MemberExpression: null,
+      FunctionDeclaration: {
+        parameters: 1,
+        body: 1
+      },
+      FunctionExpression: {
+        parameters: 1,
+        body: 1
+      },
+      CallExpression: {
+        arguments: 1
+      },
+      ArrayExpression: 1,
+      ObjectExpression: 1,
+      ImportDeclaration: 1,
+      flatTernaryExpressions: false,
+      // list derived from https://github.com/benjamn/ast-types/blob/HEAD/def/jsx.js
+      ignoredNodes: ['JSXElement', 'JSXElement > *', 'JSXAttribute', 'JSXIdentifier', 'JSXNamespacedName', 'JSXMemberExpression', 'JSXSpreadAttribute', 'JSXExpressionContainer', 'JSXOpeningElement', 'JSXClosingElement', 'JSXText', 'JSXEmptyExpression', 'JSXSpreadChild'],
+      ignoreComments: false
+    }],
 			"linebreak-style": [
 					"error",
 					"unix"
@@ -66,10 +87,7 @@ module.exports = {
 					"objectLiterals": "never"
 				}
 			],
-			"react/jsx-indent": [
-				2,
-				2
-			],
+			"react/jsx-indent": ["error", 2],
 			"react/jsx-pascal-case": [2],
 			"react/jsx-uses-vars": [2],
 			"jsx-a11y/href-no-hash" : [0],

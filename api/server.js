@@ -2,20 +2,20 @@
 // Dependencies //
 //////////////////
 const path = require('path');
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
 const cors       = require('cors');
 const http       = require('http');
 const helmet     = require('helmet');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const app        = module.exports = express();
-const axios 	   = require("axios");
+const axios 	   = require('axios');
 const session    = require('client-sessions');
 
 ////////////////
 // Misc Setup //
 ////////////////
-app.use('/uploads/', express.static(__dirname+'/uploads'));
+app.use('/uploads/', express.static(__dirname + '/uploads'));
 
 app.locals.basedir = __dirname;
 const gar = global.appRoot = app.locals.basedir;
@@ -54,13 +54,13 @@ app.use(bodyParser.urlencoded({
 app.use(helmet());
 
 app.use(cors({
-	origin: true,
-	credentials: true
+  origin: true,
+  credentials: true
 }));
 
 app.use(function(req, res, next) {
-	console.log(req.url);
-	next();
+  console.log(req.url);
+  next();
 });
 
 ///////////////////////
@@ -87,10 +87,10 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(req, res, next) {
-	res.status(404);
-	res.send("no");
+  res.status(404);
+  res.send('no');
 });
 
 app.listen(8000, () => {
-	console.log('listening, 8000');
+  console.log('listening, 8000');
 });
