@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model('Player', {
-	name: {
+  name: {
     type: String,
     required: true
   },
-	winnings: {
-		type: Number,
-		required: true
-	},
-	country: {
-		type: String,
-		required: true
-	},
-	imageUrl: {
-		type: String,
-		required: true
-	}
+  winnings: {
+    type: Number,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String,
+    required: true
+  }
 }, 'player');

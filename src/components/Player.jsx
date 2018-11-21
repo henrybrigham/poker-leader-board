@@ -72,17 +72,16 @@ class Player extends React.Component {
 						<p className="country">{country}</p>
 					</div>
 					<div className="mLA row">
-						<div className="penBox center point"
+						<button className="penBox center point"
 							onClick={this.toggleOps}>
-							<i className="fa fa-pencil" aria-hidden="true"></i>
-						</div>
-						<div className="penBox center point"
+								<i className="fa fa-pencil" aria-hidden="true"></i>
+						</button>
+						<button className="penBox center point"
 							onClick={ () => {
 								this.props.deletePlayer(this.props.player._id);
-							}}
-							>
-							<i className="fa fa-minus-square" aria-hidden="true"></i>
-						</div>
+							}}>
+								<i className="fa fa-minus-square" aria-hidden="true"></i>
+						</button>
 					</div>
 				</div>
 				{ this.renderUpdatePlayer() }

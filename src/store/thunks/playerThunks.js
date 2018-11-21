@@ -20,6 +20,7 @@ const axiosPlayer = axios.create({
 export function createPlayer(player) {
   return (dispatch) => {
     dispatch(createPlayerRequest());
+		
     let formData = new FormData();
     formData.append('picture', player.upload);
     formData.append('player', JSON.stringify(player));
@@ -34,6 +35,7 @@ export function createPlayer(player) {
 export function fetchPlayers() {
   return (dispatch) => {
     dispatch(fetchPlayersRequest());
+		
     return axiosPlayer.get('/player').then(
       payload => dispatch(fetchPlayersSuccess(payload.data)),
       error => dispatch(fetchPlayersFailure(error))

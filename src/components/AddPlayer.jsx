@@ -47,6 +47,7 @@ class LeaderBoard extends React.PureComponent {
 	}
 
 	createPlayer = (e) => {
+	  console.log('create');
 	  e.preventDefault();
 	  if (isEmpty(this.state.name.toString()) || !this.state.country.value) {
 	    this.setState({ errorMessage: 'All fields must contain valid inputs' });
@@ -87,33 +88,35 @@ class LeaderBoard extends React.PureComponent {
 	  return (
   <div className={ style.center }>
     <h4>Add Player</h4>
-    <form>
+    <form onSubmit={ this.createPlayer }>
       <div className="column center">
         <input 
-					type="text"
-					className="updateName"
-					placeholder="Name"
-					value={ this.state.name } 
-					onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
+							type="text"
+							className="updateName"
+							placeholder="Name"
+							value={ this.state.name } 
+							onChange={ (evt) => { this.updatePlayer(evt.target.value, 'name'); } }/>
         <input 
-					type="text"
-					className="updateWinnings"
-					placeholder="Winnings"
-					value={ this.state.winnings } 
-					onChange={ (evt) => { this.updatePlayer(evt.target.value, 'winnings'); } }/>
+							type="text"
+							className="updateWinnings"
+							placeholder="Winnings"
+							value={ this.state.winnings } 
+							onChange={ (evt) => { this.updatePlayer(evt.target.value, 'winnings'); } }/>
         <Select
-					className="countrySelector"
-					value={ this.state.country }
-					onChange={ this.updateCountry }
-					options={ options }
-				/>
+							className="countrySelector"
+							value={ this.state.country }
+							onChange={ this.updateCountry }
+							options={ options }
+						/>
         <input type="file" onChange={ (event) => this.handleChange(event) }/>
         { this.state.file ? <img className="drop" alt="preview" src={ this.state.file }/> : '' }
       </div>
       <p className="error">{this.state.errorMessage}</p>
-      <div className="penBox center" onClick={ this.createPlayer }>
-        <i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
-      </div>
+      <button type="submit" className="addPlayer">
+        <div className="penBox center">
+          <i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
+        </div>
+      </button>
     </form>
   </div>
 	  );

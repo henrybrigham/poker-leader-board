@@ -82,7 +82,7 @@ class UpdatePlayer extends React.Component {
 
     return (
       <div className="column editPlayer">
-        <form>
+        <form onSubmit={ this.updatePlayer }>
           <h4>Update Player</h4>
           <div className="column center">
             <input
@@ -119,17 +119,21 @@ class UpdatePlayer extends React.Component {
 						src={ this.state.file }/> : '' }
             <p className="error">{errorMessage}</p>
           </div>
-        </form>
-        <div className="center row">
-          <div className="penBox"
+          <div className="center row">
+            <button type="submit">
+              <div className="penBox"
 						onClick={ this.updatePlayer }>
-            <i className="fa fa-telegram" aria-hidden="true"></i>
-          </div>
-          <div className="penBox"
+                <i className="fa fa-telegram" aria-hidden="true"></i>
+              </div>
+            </button>
+            <button type="button">
+              <div className="penBox"
 						onClick={ this.props.toggleOps }>
-            <i className="fa fa-window-close" aria-hidden="true"></i>
+                <i className="fa fa-window-close" aria-hidden="true"></i>
+              </div>
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     );
   }
