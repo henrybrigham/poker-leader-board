@@ -112,10 +112,8 @@ class LeaderBoard extends React.PureComponent {
         { this.state.file ? <img className="drop" alt="preview" src={ this.state.file }/> : '' }
       </div>
       <p className="error">{this.state.errorMessage}</p>
-      <button type="submit" className="addPlayer">
-        <div className="penBox center">
-          <i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
-        </div>
+      <button type="submit" className="addPlayer penBox center">
+        <i className="fa fa-2x fa-user-plus" aria-hidden="true"></i>
       </button>
     </form>
   </div>
